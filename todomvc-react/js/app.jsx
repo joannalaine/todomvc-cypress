@@ -173,6 +173,10 @@ var app = app || {};
 
 	var model = new app.TodoModel('react-todos');
 
+	if (window.Cypress) {
+		window.model = model
+	  }
+
 	function render() {
 		React.render(
 			<TodoApp model={model}/>,
