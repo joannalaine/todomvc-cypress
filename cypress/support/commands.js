@@ -23,3 +23,20 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("createDefaultTodos", (tasks) => {
+  if (typeof tasks === "number") {
+    for (let index = 0; index < tasks; index++) {
+      cy.window()
+        .its("model")
+        .invoke("addTodo", "Task " + `${index + 1}`);
+    }
+  } else {
+    if (typeof tasks === "string") {
+      tasks = [tasks];
+    }
+    tasks.forEach((task) => {
+      cy.window().its("model").invoke("addTodo", task);
+    });
+  }
+});

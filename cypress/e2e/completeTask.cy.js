@@ -1,16 +1,9 @@
 describe("Completing tasks", () => {
-  const TASKS = [
-    "mop the kitchen",
-    "renew vehicle registration",
-    "book a dentist appointment",
-  ];
-
   beforeEach(function () {
     cy.visit("/");
-    TASKS.forEach((task) => {
-      cy.window().its("model").invoke("addTodo", task);
-    });
-    cy.get(".todo-list li").as("todos");
+    cy.createDefaultTodos(2);
+    cy.createDefaultTodos("my task");
+    cy.createDefaultTodos(["next task", "last task"]);
   });
 
   it("should complete the first active task", () => {
